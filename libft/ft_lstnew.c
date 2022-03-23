@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/23 20:41:02 by dienasci         ###   ########.fr       */
+/*   Created: 2021/08/17 09:31:14 by dienasci          #+#    #+#             */
+/*   Updated: 2022/03/23 20:44:25 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/libft.h"
 
-int main()
+t_list	*ft_lstnew(void *content)
 {
-	char *str;
+	t_list	*new;
 
-	while (str = readline(">"))
-	{
-		
-	}
+	new = (t_list *)malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

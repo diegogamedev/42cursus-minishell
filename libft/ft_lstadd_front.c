@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/23 20:41:02 by dienasci         ###   ########.fr       */
+/*   Created: 2021/08/17 09:31:00 by dienasci          #+#    #+#             */
+/*   Updated: 2022/03/23 20:44:25 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/libft.h"
 
-int main()
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char *str;
-
-	while (str = readline(">"))
-	{
-		
-	}
+	if (!new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

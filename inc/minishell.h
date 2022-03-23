@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/23 20:41:02 by dienasci         ###   ########.fr       */
+/*   Created: 2022/03/22 07:34:31 by dienasci          #+#    #+#             */
+/*   Updated: 2022/03/23 20:46:17 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int main()
-{
-	char *str;
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-	while (str = readline(">"))
-	{
-		
-	}
-}
+#endif

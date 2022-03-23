@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/23 20:41:02 by dienasci         ###   ########.fr       */
+/*   Created: 2021/08/12 21:19:42 by dienasci          #+#    #+#             */
+/*   Updated: 2022/03/23 20:44:25 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/libft.h"
 
-int main()
+size_t	ft_strlen(const char	*s)
 {
-	char *str;
+	size_t	ret;
 
-	while (str = readline(">"))
-	{
-		
-	}
+	ret = 0;
+	while (s[ret])
+		ret++;
+	return (ret);
 }

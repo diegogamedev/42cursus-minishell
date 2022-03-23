@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/23 20:41:02 by dienasci         ###   ########.fr       */
+/*   Created: 2021/08/17 10:18:03 by dienasci          #+#    #+#             */
+/*   Updated: 2022/03/23 20:44:25 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/libft.h"
 
-int main()
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	char *str;
+	t_list	*current;
 
-	while (str = readline(">"))
+	if (lst)
 	{
-		
+		while (*lst)
+		{
+			current = (*lst)->next;
+			ft_lstdelone(*lst, del);
+			(*lst) = current;
+		}
 	}
 }

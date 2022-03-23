@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/23 20:41:02 by dienasci         ###   ########.fr       */
+/*   Created: 2021/08/12 21:16:02 by dienasci          #+#    #+#             */
+/*   Updated: 2022/03/23 20:44:25 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/libft.h"
 
-int main()
+char	*ft_strdup(const char *s)
 {
-	char *str;
+	char	*dup;
+	int		index;
+	int		aux;
 
-	while (str = readline(">"))
+	index = 0;
+	while (s[index])
+		index++;
+	dup = (char *)malloc(index + 1);
+	if (dup == NULL)
+		return (NULL);
+	aux = 0;
+	while (s[aux])
 	{
-		
+		dup[aux] = s[aux];
+		aux++;
 	}
+	dup[aux] = '\0';
+	return (dup);
 }
