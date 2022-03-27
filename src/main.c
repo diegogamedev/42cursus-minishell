@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/26 13:10:21 by dienasci         ###   ########.fr       */
+/*   Updated: 2022/03/27 20:55:14 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include "stdio.h"
 
 int main(int argc, const char *argv[], char *envp[])
 {
 	char	*str;
 	char	**tmp;
+	char	*prompt;
 
-	while (str = readline(">"))
+	prompt = create_prompt();
+	while (str = readline(prompt))
 	{
 		tmp = ft_split(str, ' ');
 		if(try_run(tmp))

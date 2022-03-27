@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   create_prompt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 07:34:31 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/27 20:30:39 by coder            ###   ########.fr       */
+/*   Created: 2022/03/27 19:14:03 by coder             #+#    #+#             */
+/*   Updated: 2022/03/27 19:52:48 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../inc/minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
+char	*get_current_dir(void)
+{
+	char	*buffer;
 
-int		try_run(char **argv);
-char	*create_prompt(void);
-char	*get_current_dir(void);
+	return (getcwd(buffer, 0));
+}
 
-#endif
+char	*create_prompt(void)
+{
+	char	*current_dir;
+	char	*prompt;
+
+	current_dir = get_current_dir();
+	prompt = ft_strjoin(current_dir, "> ");
+	free(current_dir);
+	return (prompt);	
+}
