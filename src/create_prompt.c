@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   create_prompt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 21:02:20 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/27 16:15:25 by dienasci         ###   ########.fr       */
+/*   Created: 2022/03/27 19:14:03 by coder             #+#    #+#             */
+/*   Updated: 2022/03/27 19:52:48 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include "stdio.h"
 
-int main(int argc, const char *argv[], char *envp[])
+char	*get_current_dir(void)
 {
-	char	*str;
-	char	**tmp;
+	char	*buffer;
+
+	return (getcwd(buffer, 0));
+}
+
+char	*create_prompt(void)
+{
+	char	*current_dir;
 	char	*prompt;
 
-	prompt = create_prompt();
-	while (str = readline(prompt))
-	{
-		tmp = ft_split(str, ' ');
-		try_run(tmp);
-	}
+	current_dir = get_current_dir();
+	prompt = ft_strjoin(current_dir, "> ");
+	free(current_dir);
+	return (prompt);	
 }
