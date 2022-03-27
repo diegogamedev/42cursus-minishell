@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 07:34:31 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/27 16:18:38 by dienasci         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -22,7 +10,6 @@
 # include "libft.h"
 
 int		try_run(char **argv);
-char	*get_current_dir(void);
 char	*create_prompt(void);
 
 #endif
