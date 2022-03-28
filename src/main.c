@@ -12,6 +12,8 @@ int main(int argc, const char *argv[], char *envp[])
 	{
 		if (ft_strlen(str))
 			add_history(str);
+		else
+			continue;
 		tmp = ft_split(str, ' ');
 		try_run(tmp);
 	}
