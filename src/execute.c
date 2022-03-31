@@ -21,17 +21,17 @@ static char	*get_exec_path(char *name)
 	return NULL;
 }
 
-int	try_run(char **argv)
+int	try_run(t_cmd *cmd)
 {
 	char	*aux;
 	int		status;
 
-	aux = get_exec_path(argv[0]);
+	aux = get_exec_path(cmd->cmd_name);
 	status = 0;
 	if(aux != NULL)
 	{
 		if (!fork())
-			execve(aux, argv, 0);
+			execve(aux, cmd->cmd_argv, 0);
 		else
 			wait(&status);
 		free(aux);
