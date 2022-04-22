@@ -21,7 +21,7 @@ static char	*get_exec_path(char *name)
 	return NULL;
 }
 
-int	try_run(t_cmd *cmd)
+void	try_run(t_cmd *cmd)
 {
 	char	*aux;
 	int		status;
@@ -35,7 +35,5 @@ int	try_run(t_cmd *cmd)
 		else
 			wait(&status);
 		free(aux);
-		return 1;
 	}
-	return 0;
 }

@@ -1,25 +1,31 @@
 #include "../inc/minishell.h"
 #include "stdio.h"
 
+t_shell *shell_mem;
+
 int main(int argc, const char *argv[], char *envp[])
 {
-	char	*str;
-	char	**tmp;
-	char	*prompt;
-	t_cmd	*cur_cmd;
-	static int (*const func_ptr[1])(t_cmd *) = {try_run};
+	char		*str;
+	char		*prompt;
+	char		**tmp;
+	shell_func	*hold;
+	int			i;
 
+	shell_mem = ft_calloc(sizeof(t_shell *), 1);
 	prompt = create_prompt();
+	init_table();
+	i = 0;
 	while (str = readline(prompt))
 	{
 		if (ft_strlen(str))
 			add_history(str);
 		else
 			continue;
-		cur_cmd = ft_calloc(1, sizeof(t_cmd));
-		cur_cmd->cmd_argv= ft_split(str, ' ');
-		cur_cmd->cmd_name = cur_cmd->cmd_argv[0];
-		(func_ptr[0])(cur_cmd);
-		free(cur_cmd);
+		tmp = ft_split_str(str, ";>|<&");
+		hold = get_exec_list(tmp);
+		while(hold[i])
+			hold[i](tmp[i]);
+		free(tmp);
+		free(hold);
 	}
 }
