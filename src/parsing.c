@@ -2,6 +2,31 @@
 
 extern t_shell *shell_mem;
 
+static ops get_cmd_operators(char *argv)
+{
+	int i;
+	ops	ret;
+
+	i = -1;
+	while(argv[i++])
+	{
+		if (ft_strchr(">|<&", argv[i]))
+		{
+			if(argv[i] == '>' && argv[i+1] != '>')
+				ret == redir_output;
+			else if (argv[i] == '>' && argv[i + 1] == '>')
+				ret == append;
+			else if (argv[i] == '<' && argv[i + 1] != '<')
+				ret == append;
+			else if (argv[i] == '<' && argv[i + 1] == '<')
+				ret == append;
+			else
+				ret == pipe_op;
+			return ret;
+		}
+	}
+}
+
 static int	count_2d_array(char **args)
 {
 	int ret;
@@ -12,6 +37,17 @@ static int	count_2d_array(char **args)
 	return ret;
 }
 
+static void	add_command(char *name, char **argv, int operator, int index)
+{
+	t_cmd *cmd;
+
+	cmd = ft_calloc(sizeof(t_cmd *), 1);
+	cmd->cmd_argv = argv;
+	cmd->cmd_name = name;
+	cmd->fwrd_op = operator;
+	shell_mem->curr_cmd_list[index] = cmd;
+}
+
 shell_func	*get_exec_list(char **args)
 {
 	t_data			*hold;
@@ -19,7 +55,9 @@ shell_func	*get_exec_list(char **args)
 	int				i;
 	char			**tmp;
 
-	commands = ft_calloc(sizeof(shell_func *), count_2d_array(args));
+	i = count_2d_array(args);
+	commands = ft_calloc(sizeof(shell_func *), i + 1);
+	shell_mem->curr_cmd_list = ft_calloc(sizeof(t_cmd *), i);
 	i = 0;
 	while(args[i])
 	{
@@ -29,7 +67,9 @@ shell_func	*get_exec_list(char **args)
 			commands[i] = try_run;
 		else
 			commands[i] = hold->value;
+		add_command(tmp[0], tmp, get_cmd_operators(args[i]), i);
 		i++;
 	}
+	commands[i] = NULL;
 	return commands;
 }

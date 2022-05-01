@@ -31,9 +31,22 @@ void	try_run(t_cmd *cmd)
 	if(aux != NULL)
 	{
 		if (!fork())
-			execve(aux, cmd->cmd_argv, 0);
+			execve(aux, (char * const *)cmd->cmd_argv, 0);
 		else
 			wait(&status);
 		free(aux);
 	}
+}
+
+void	example_func(t_cmd *cmd)
+{
+	int i;
+	printf("example func called\n name: %s;\n args: ", cmd->cmd_name);
+	i = 0;
+	while(cmd->cmd_argv[i])
+	{
+		printf("%s, ", cmd->cmd_argv[i]);
+		i++;
+	}
+	printf("\b\b.\noperators: %d\n", cmd->fwrd_op);
 }

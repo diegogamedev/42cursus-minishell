@@ -6,16 +6,15 @@ t_shell *shell_mem;
 int main(int argc, const char *argv[], char *envp[])
 {
 	char		*str;
-	char		*prompt;
+	char		prompt[256];
 	char		**tmp;
 	shell_func	*hold;
 	int			i;
 
 	shell_mem = ft_calloc(sizeof(t_shell *), 1);
-	prompt = create_prompt();
 	init_table();
 	i = 0;
-	while (str = readline(prompt))
+	while (str = readline(ft_strjoin(getcwd(prompt, 256), "> ")))
 	{
 		if (ft_strlen(str))
 			add_history(str);
@@ -23,8 +22,11 @@ int main(int argc, const char *argv[], char *envp[])
 			continue;
 		tmp = ft_split_str(str, ";>|<&");
 		hold = get_exec_list(tmp);
-		while(hold[i])
-			hold[i](tmp[i]);
+		while (hold[i] != NULL)
+		{
+			hold[i](shell_mem->curr_cmd_list[i]);
+			i++;
+		}
 		free(tmp);
 		free(hold);
 	}

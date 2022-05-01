@@ -11,11 +11,11 @@
 
 typedef enum operators
 {
-	redir_input = 0,
-	delimiter = 1,
-	redir_output = 2,
-	append = 3,
-	pipe_op = 4
+	redir_input = 1 << 0,
+	delimiter = 1 << 1,
+	redir_output = 1 << 2,
+	append = 1 << 3,
+	pipe_op = 1 << 4
 } ops;
 
 typedef struct s_cmd
@@ -37,7 +37,8 @@ typedef struct s_shell
 {
 	t_cmd	*prev_input;
 	char	*prev_output;
-	t_data	*table[10];
+	t_data	**table;
+	t_cmd	**curr_cmd_list;
 } t_shell;
 
 extern t_shell *shell_mem;
@@ -48,5 +49,5 @@ shell_func	*get_exec_list(char **args);
 char		**ft_split_str(const char *str, char *s);
 void		init_table();
 t_data		*find(const char *key);
-
+void		example_func(t_cmd *cmd);
 #endif

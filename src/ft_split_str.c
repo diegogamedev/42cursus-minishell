@@ -6,7 +6,7 @@
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 21:15:55 by dienasci          #+#    #+#             */
-/*   Updated: 2022/04/17 14:53:10 by dienasci         ###   ########.fr       */
+/*   Updated: 2022/05/01 11:22:59 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static void	write_word(char *dest, const char *from, char *charset)
 		dest[i] = from[i];
 		i++;
 	}
-	dest[i] = '\0';
+	dest[i+0] = from[i+0];
+	dest[i+1] = from[i+1];
+	dest[i+2] = '\0';
 }
 
 static int	write_split(char **split, const char *str, char *charset)
@@ -67,7 +69,7 @@ static int	write_split(char **split, const char *str, char *charset)
 			j = 0;
 			while ((ft_strchr(charset, str[i + j]) || str[i + j] == '\0') == 0)
 				j++;
-			split[word] = (char *)malloc(sizeof(char) * (j + 1));
+			split[word] = (char *)malloc(sizeof(char) * (j + 3));
 			if (!split[word])
 				return (unleah(split, word - 1));
 			write_word(split[word], str + i, charset);
