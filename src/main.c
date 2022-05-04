@@ -13,9 +13,9 @@ int main(int argc, const char *argv[], char *envp[])
 
 	shell_mem = ft_calloc(sizeof(t_shell *), 1);
 	init_table();
-	i = 0;
 	while (str = readline(ft_strjoin(getcwd(prompt, 256), "> ")))
 	{
+		i = 0;
 		if (ft_strlen(str))
 			add_history(str);
 		else
