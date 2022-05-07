@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include <minishell.h>
 #include "stdio.h"
 
 t_shell *shell_mem;
@@ -20,7 +20,7 @@ int main(int argc, const char *argv[], char *envp[])
 			add_history(str);
 		else
 			continue;
-		tmp = ft_split_str(str, ";>|<&");
+		tmp = split_commands(str);
 		hold = get_exec_list(tmp);
 		while (hold[i] != NULL)
 		{

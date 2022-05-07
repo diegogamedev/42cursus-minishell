@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include <minishell.h>
 
 extern t_shell *shell_mem;
 
@@ -7,24 +7,37 @@ static ops get_cmd_operators(char *argv)
 	int i;
 	ops	ret;
 
-	i = -1;
-	while(argv[i++])
+	i = 0;
+	ret = none;
+	while(argv[i])
 	{
-		if (ft_strchr(">|<&", argv[i]))
+		if (argv[i] == '>')
 		{
-			if(argv[i] == '>' && argv[i+1] != '>')
-				ret == redir_output;
-			else if (argv[i] == '>' && argv[i + 1] == '>')
-				ret == append;
-			else if (argv[i] == '<' && argv[i + 1] != '<')
-				ret == append;
-			else if (argv[i] == '<' && argv[i + 1] == '<')
-				ret == append;
+			if (argv[i] != '>')
+				ret |= redir_output;
 			else
-				ret == pipe_op;
-			return ret;
+			{
+				ret |= append;
+				i++;
+			}
 		}
+		else if (argv[i] == '<')
+		{
+			if (argv[i] != '<')
+				ret |= redir_input;
+			else
+			{
+				ret |= delimiter;
+				i++;
+			}
+		}
+		else if (argv[i] == '|')
+			ret |= pipe_op;
+		printf("%d", ret);
+		i++;
 	}
+	printf("%d\n", ret);
+	return ret;
 }
 
 static int	count_2d_array(char **args)

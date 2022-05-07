@@ -6,11 +6,11 @@
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 21:15:55 by dienasci          #+#    #+#             */
-/*   Updated: 2022/05/01 11:22:59 by dienasci         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:48:17 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include <minishell.h>
 
 static int	unleah(char **str, int size)
 {
@@ -80,17 +80,17 @@ static int	write_split(char **split, const char *str, char *charset)
 	return (0);
 }
 
-char	**ft_split_str(const char *str, char *s)
+char	**split_commands(const char *str)
 {
 	char	**res;
 	int		words;
 
-	words = count_words(str, s);
+	words = count_words(str, ";|");
 	res = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!res)
 		return (NULL);
 	res[words] = 0;
-	if (write_split(res, str, s) == -1)
+	if (write_split(res, str, ";|") == -1)
 		return (NULL);
 	return (res);
 }

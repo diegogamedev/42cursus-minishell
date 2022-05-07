@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include <minishell.h>
 
 static char	*get_exec_path(char *name)
 {
