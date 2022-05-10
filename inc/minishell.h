@@ -50,5 +50,6 @@ shell_func	*get_exec_list(char **args);
 char		**split_commands(const char *str);
 void		init_table();
 t_data		*find(const char *key);
+void		ft_echo(t_cmd *cmd);
 void		example_func(t_cmd *cmd);
 #endif

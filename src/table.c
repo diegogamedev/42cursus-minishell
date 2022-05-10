@@ -29,7 +29,7 @@ void	init_table(void)
 	printf("initializing table...\n");
 	shell_mem->table = ft_calloc(sizeof(t_data *), 8);
 
-	insert_table(&example_func, "echo", 0);
+	insert_table(&ft_echo, "echo", 0);
 	insert_table(&example_func, "cd", 1);
 	insert_table(&example_func, "pwd", 2);
 	insert_table(&example_func, "export", 3);
