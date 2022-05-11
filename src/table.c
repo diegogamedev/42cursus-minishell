@@ -30,11 +30,11 @@ void	init_table(void)
 	shell_mem->table = ft_calloc(sizeof(t_data *), 8);
 
 	insert_table(&ft_echo, "echo", 0);
-	insert_table(&example_func, "cd", 1);
-	insert_table(&example_func, "pwd", 2);
+	insert_table(&ft_cd, "cd", 1);
+	insert_table(&ft_pwd, "pwd", 2);
 	insert_table(&example_func, "export", 3);
 	insert_table(&example_func, "unset", 4);
 	insert_table(&example_func, "env", 5);
-	insert_table(&example_func, "exit", 6);
+	insert_table(&ft_exit, "exit", 6);
 
 }

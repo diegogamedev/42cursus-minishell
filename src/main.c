@@ -29,5 +29,8 @@ int main(int argc, const char *argv[], char *envp[])
 		}
 		free(tmp);
 		free(hold);
+		if(shell_mem->exit_flag == 1)
+			break ;
 	}
+	//free routines
 }
