@@ -11,6 +11,7 @@ int main(int argc, const char *argv[], char *envp[])
 	shell_func	*hold;
 	int			i;
 
+	ft_signals();
 	shell_mem = ft_calloc(sizeof(t_shell *), 1);
 	init_table();
 	while (str = readline(ft_strjoin(getcwd(prompt, 256), "> ")))

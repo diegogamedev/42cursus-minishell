@@ -8,6 +8,7 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include "libft.h"
+# include <signal.h>
 
 typedef enum operators
 {
@@ -45,6 +46,7 @@ typedef struct s_shell
 
 extern t_shell *shell_mem;
 
+void		ft_signals(void);
 void		try_run(t_cmd *cmd);
 char		*create_prompt(void);
 shell_func	*get_exec_list(char **args);
