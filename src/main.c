@@ -3,6 +3,14 @@
 
 t_shell *shell_mem;
 
+void	init_shell_mem()
+{
+	shell_mem = ft_calloc(sizeof(t_shell *), 1);
+	shell_mem->pipe = ft_calloc(sizeof(int), 2);
+	pipe(shell_mem->pipe);
+	init_table();
+}
+
 int main(int argc, const char *argv[], char *envp[])
 {
 	char		*str;
@@ -11,8 +19,7 @@ int main(int argc, const char *argv[], char *envp[])
 	shell_func	*hold;
 	int			i;
 
-	shell_mem = ft_calloc(sizeof(t_shell *), 1);
-	init_table();
+	init_shell_mem();
 	while (str = readline(ft_strjoin(getcwd(prompt, 256), "> ")))
 	{
 		i = 0;
@@ -25,12 +32,12 @@ int main(int argc, const char *argv[], char *envp[])
 		while (hold[i] != NULL)
 		{
 			hold[i](shell_mem->curr_cmd_list[i]);
+			if (shell_mem->exit_flag == 1)
+				break;
 			i++;
 		}
 		free(tmp);
 		free(hold);
-		if(shell_mem->exit_flag == 1)
-			break ;
 	}
 	//free routines
 }

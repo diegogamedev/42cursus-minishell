@@ -20,12 +20,8 @@ void ft_echo(t_cmd *cmd)
 	int i;
 	int eof;
 
-	i = 1;
-	if (!ft_strncmp(cmd->cmd_argv[i], "-n", 2))
-	{
-		eof = 1;
-		i++;
-	}
+	eof = ft_strncmp(cmd->cmd_argv[i], "-n", 2);
+	i = 1 + eof;
 	while (cmd->cmd_argv[i])
 	{
 		ft_putstr_fd(cmd->cmd_argv[i], 1);

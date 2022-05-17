@@ -12,14 +12,6 @@ void	redirect_to_file(char *content, const char *filepath, const char *mode)
 	}
 }
 
-char	*exec_operator(ops operator)
-{
-	if(operator == redir_input)
-		return shell_mem->prev_input->cmd_name;
-	else if(operator == redir_output || operator == pipe_op)
-		return shell_mem->prev_output;
-}
-
 char	*exec_delimiter(const char *prompt)
 {
 	char	*str;
@@ -36,3 +28,5 @@ char	*exec_delimiter(const char *prompt)
 	}
 	return ret;
 }
+
+
