@@ -9,6 +9,7 @@
 # include <sys/wait.h>
 # include <libft.h>
 # include <signal.h>
+# include <fcntl.h>
 
 typedef enum operators
 {
@@ -37,6 +38,7 @@ typedef struct s_data
 
 typedef struct s_shell
 {
+	t_cmd	*last_cmd;
 	int		*pipe;
 	t_data	**table;
 	t_cmd	**curr_cmd_list;
@@ -57,4 +59,5 @@ void		ft_cd(t_cmd *cmd);
 void		ft_pwd(t_cmd *cmd);
 void		ft_exit(t_cmd *cmd);
 void		example_func(t_cmd *cmd);
+void		redirect_to_file(char *content, int fd);
 #endif

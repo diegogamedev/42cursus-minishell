@@ -1,15 +1,9 @@
 #include <minishell.h>
 
-void	redirect_to_file(char *content, const char *filepath, const char *mode)
+void	redirect_to_file(char *content, int fd)
 {
-	FILE	*file;
-
-	file = fopen(filepath, mode);
-	if(file)
-	{
-		fwrite(content, ft_strlen(content), sizeof(char), file);
-		fclose(file);
-	}
+	if(!fcntl(fd, F_GETFD))
+		fwrite(content, ft_strlen(content), sizeof(char), fd);
 }
 
 char	*exec_delimiter(const char *prompt)
