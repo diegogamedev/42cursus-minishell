@@ -33,10 +33,8 @@ static ops get_cmd_operators(char *argv)
 		}
 		else if (argv[i] == '|')
 			ret |= pipe_op;
-		printf("%d", ret);
 		i++;
 	}
-	printf("%d\n", ret);
 	return ret;
 }
 

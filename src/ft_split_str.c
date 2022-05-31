@@ -27,6 +27,7 @@ static int	count_words(const char *str, char *charset)
 
 	words = 0;
 	i = 0;
+	j = 0;
 	while (str[i] != '\0')
 	{
 		if ((ft_strchr(charset, str[i + 1]) || str[i + 1] == '\0') == 1)

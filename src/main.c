@@ -3,11 +3,16 @@
 
 t_shell *shell_mem;
 
+void	free_2dpointer(void **tmp)
+{
+	while(tmp)
+		tmp++;
+}
+
 static void	init_seq()
 {
 	shell_mem = ft_calloc(sizeof(t_shell *), 1);
-	shell_mem->pipe = ft_calloc(sizeof(int), 2);
-	pipe(shell_mem->pipe);
+	shell_mem->prompt = ft_calloc(sizeof(char), 4100);
 	init_table();
 	ft_signals();
 }
@@ -15,34 +20,42 @@ static void	init_seq()
 static void	exec(shell_func *list)
 {
 	int i;
+	int child;
 
+	i = 0;
 	while (list[i] != NULL)
 	{
-		list[i](shell_mem->curr_cmd_list[i]);
-		if (shell_mem->exit_flag == 1)
-			break;
+		child = fork();
+		if(!child)
+		{
+			list[i](shell_mem->curr_cmd_list[i]);
+			if (shell_mem->exit_flag == 1)
+				break; 
+		}
+		else
+			wait(&child);
 		shell_mem->last_cmd = shell_mem->curr_cmd_list[i];
 		i++;
 	}
-	free(list);
+	while(list)
+		free(list++);
 }
 
 static void	finish()
 {
 	free(shell_mem->last_cmd);
-	free(shell_mem->table);
-	free(shell_mem->pipe);
+	free_2dpointer((void **)shell_mem->table);
 }
 
-int main(int argc, const char *argv[], char *envp[])
+int main()
 {
-	init_seq();
+	char prompt[4096];
 	char *str;
-	char prompt[256];
 	char **tmp;
 
 	init_seq();
-	while (str = readline(ft_strjoin(getcwd(prompt, 256), "> ")))
+	shell_mem->prompt = ft_strjoin(getcwd(prompt, 4096), "> ");
+	while ((str = readline(shell_mem->prompt)))
 	{
 		if (ft_strlen(str))
 			add_history(str);
@@ -50,7 +63,9 @@ int main(int argc, const char *argv[], char *envp[])
 			continue;
 		tmp = split_commands(str);
 		exec(get_exec_list(tmp));
-		free(tmp);
+		free(str);
+		free(shell_mem->last_cmd);
+		free_2dpointer((void **)shell_mem->curr_cmd_list);
 		if (shell_mem->exit_flag == 1)
 			break;
 	}

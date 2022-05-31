@@ -38,8 +38,8 @@ typedef struct s_data
 
 typedef struct s_shell
 {
+	char	*prompt;
 	t_cmd	*last_cmd;
-	int		*pipe;
 	t_data	**table;
 	t_cmd	**curr_cmd_list;
 	int		exit_flag;

@@ -13,9 +13,7 @@
 #include <minishell.h>
 
 static void	signal_handler(int signum)
-{
-	char		prompt[256];
-	
+{	
 	if (signum == SIGINT)
 	{
 		ft_putstr_fd("\nSIGINT sended...\n", 1);

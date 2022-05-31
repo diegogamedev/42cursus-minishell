@@ -9,10 +9,10 @@ void	ft_pwd(t_cmd *cmd)
 {
 	char *tmp;
 
+	(void)cmd;
 	tmp = ft_calloc(sizeof(char), 512);
 	getcwd(tmp, 512);
 	ft_putendl_fd(tmp, 1);
-	redirect_to_file(tmp, shell_mem->pipe[0]);
 	free(tmp);
 }
 
@@ -21,27 +21,21 @@ void ft_echo(t_cmd *cmd)
 	int i;
 	int eof;
 
-	eof = ft_strncmp(cmd->cmd_argv[i], "-n", 2);
+	eof = ft_strncmp(cmd->cmd_argv[0], "-n", 2);
 	i = 1 + eof;
 	while (cmd->cmd_argv[i])
 	{
 		ft_putstr_fd(cmd->cmd_argv[i], 1);
-		redirect_to_file(cmd->cmd_argv[i], shell_mem->pipe[0]);
 		if (cmd->cmd_argv[i + 1] != NULL && (i + eof != 3 || i != 1))
-		{
 			ft_putchar_fd(' ', 1);
-			redirect_to_file(" ", shell_mem->pipe[0]);
-		}
 		i++;
 	}
 	if (!eof)
-	{
 		ft_putchar_fd('\n', 1);
-		redirect_to_file("\n", shell_mem->pipe[0]);
-	}
 }
 
 void	ft_exit(t_cmd *cmd)
 {
+	(void)cmd;
 	shell_mem->exit_flag = 1;
 }
