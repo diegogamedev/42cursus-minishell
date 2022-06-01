@@ -3,10 +3,23 @@
 
 t_shell *shell_mem;
 
-void	free_2dpointer(void **tmp)
+static void	clean_cmds()
 {
-	while(tmp)
-		tmp++;
+	int i;
+	int j;
+
+	i = 0;
+	while(shell_mem->curr_cmd_list[i])
+	{
+		j = 0;
+		free(shell_mem->curr_cmd_list[i]->cmd_name);
+		while(shell_mem->curr_cmd_list[i]->cmd_argv[j])
+		{
+			free(shell_mem->curr_cmd_list[i]->cmd_argv[j]);
+			j++;
+		}
+		free(shell_mem->curr_cmd_list[i]);
+	}
 }
 
 static void	init_seq()
@@ -32,19 +45,17 @@ static void	exec(shell_func *list)
 			if (shell_mem->exit_flag == 1)
 				break; 
 		}
-		else
-			wait(&child);
 		shell_mem->last_cmd = shell_mem->curr_cmd_list[i];
 		i++;
 	}
-	while(list)
-		free(list++);
 }
 
 static void	finish()
 {
+	int i = 0;
 	free(shell_mem->last_cmd);
-	free_2dpointer((void **)shell_mem->table);
+	while(shell_mem->table[i])
+		free(shell_mem->table[i++]);
 }
 
 int main()
@@ -65,7 +76,7 @@ int main()
 		exec(get_exec_list(tmp));
 		free(str);
 		free(shell_mem->last_cmd);
-		free_2dpointer((void **)shell_mem->curr_cmd_list);
+		clean_cmds();
 		if (shell_mem->exit_flag == 1)
 			break;
 	}

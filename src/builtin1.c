@@ -2,7 +2,11 @@
 
 void	ft_cd(t_cmd *cmd)
 {
+	char prompt[4096];
+	
 	chdir(cmd->cmd_argv[1]);
+	free(shell_mem->prompt);
+	shell_mem->prompt = ft_strjoin(getcwd(prompt, 4096), "> ");
 }
 
 void	ft_pwd(t_cmd *cmd)
