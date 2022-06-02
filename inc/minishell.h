@@ -21,11 +21,10 @@ typedef enum operators
 	pipe_op = 1 << 4
 } ops;
 
-typedef void (*shell_func)(t_cmd *);
-
 typedef struct s_cmd
 {
 	char	*cmd_name;
+	char	*cmd_params;
 	char	**cmd_argv;
 	ops		fwrd_op;
 } t_cmd;
@@ -36,6 +35,8 @@ typedef struct s_pipes
 	int p_stdout[2];
 	int p_stderr[2];
 } t_pipes;
+
+typedef void (*shell_func)(t_cmd *);
 
 typedef struct s_data
 {
@@ -68,4 +69,7 @@ void		ft_pwd(t_cmd *cmd);
 void		ft_exit(t_cmd *cmd);
 void		example_func(t_cmd *cmd);
 void		redirect_to_file(char *content, int fd);
+void		init_pipes();
+void		set_pipes();
+void		close_pipes();
 #endif

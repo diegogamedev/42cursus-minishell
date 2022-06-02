@@ -26,7 +26,6 @@ static void	insert_table(shell_func func, char *name, int index)
 
 void	init_table(void)
 {
-	printf("initializing table...\n");
 	shell_mem->table = ft_calloc(sizeof(t_data *), 8);
 
 	insert_table(&ft_echo, "echo", 0);

@@ -48,13 +48,14 @@ static int	count_2d_array(char **args)
 	return ret;
 }
 
-static void	add_command(char *name, char **argv, int operator, int index)
+static void	add_command(char *full, char **argv, int operator, int index)
 {
 	t_cmd *cmd;
 
 	cmd = ft_calloc(sizeof(t_cmd *), 1);
 	cmd->cmd_argv = argv;
-	cmd->cmd_name = name;
+	cmd->cmd_name = argv[0];
+	cmd->cmd_params = full;
 	cmd->fwrd_op = operator;
 	shell_mem->curr_cmd_list[index] = cmd;
 }
@@ -78,7 +79,7 @@ shell_func	*get_exec_list(char **args)
 			commands[i] = try_run;
 		else
 			commands[i] = hold->value;
-		add_command(tmp[0], tmp, get_cmd_operators(args[i]), i);
+		add_command(args[i], tmp, get_cmd_operators(args[i]), i);
 		i++;
 	}
 	commands[i] = NULL;
