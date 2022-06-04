@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 21:15:55 by dienasci          #+#    #+#             */
-/*   Updated: 2022/03/23 20:45:18 by dienasci         ###   ########.fr       */
+/*   Updated: 2022/06/03 01:46:59 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**ft_split(const char *str, char c)
 	int		words;
 
 	words = count_words(str, c);
-	res = (char **)malloc(sizeof(char *) * (words + 1));
+	res = ft_calloc(sizeof(char *), (words + 1));
 	if (!res)
 		return (NULL);
 	res[words] = 0;

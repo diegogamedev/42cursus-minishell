@@ -1,39 +1,35 @@
 #include <minishell.h>
 
-t_data	*find(const char *key)
+t_data	find(const char *key)
 {
 	int	i;
+	t_data ret;
 
+	ret.key = "";
+	ret.value = NULL;
 	i = 0;
-	while (shell_mem->table[i] != NULL)
+	while (i < 1)
 	{
-		if(ft_strncmp(key, shell_mem->table[i]->key, ft_strlen(key)) == 0)
-			return shell_mem->table[i];
+		if(ft_strncmp(key, get_table()[i].key, ft_strlen(key)) == 0)
+			return get_table()[i];
 		i++;
 	}
-	return NULL;
+	return ret;
 }
 
-static void	insert_table(shell_func func, char *name, int index)
+t_data	*get_table(void)
 {
-	t_data *new_hash;
-
-	new_hash = ft_calloc(sizeof(t_data *), 1);
-	new_hash->key = name;
-	new_hash->value = func;
-	shell_mem->table[index] = new_hash;
-}
-
-void	init_table(void)
-{
-	shell_mem->table = ft_calloc(sizeof(t_data *), 8);
-
-	insert_table(&ft_echo, "echo", 0);
-	insert_table(&ft_cd, "cd", 1);
-	insert_table(&ft_pwd, "pwd", 2);
-	insert_table(&example_func, "export", 3);
-	insert_table(&example_func, "unset", 4);
-	insert_table(&example_func, "env", 5);
-	insert_table(&ft_exit, "exit", 6);
-
+	static t_data table[4];
+	if(table[0].value == NULL)
+	{
+		table[0].key = ft_strdup("echo");
+		table[0].value = &ft_echo;
+		table[1].key = ft_strdup("cd");
+		table[1].value = &ft_cd;
+		table[2].key = ft_strdup("exit");
+		table[2].value = &ft_exit;
+		table[3].key = ft_strdup("pwd");
+		table[3].value = &ft_pwd;
+	}
+	return table;
 }

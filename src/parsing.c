@@ -50,19 +50,17 @@ static int	count_2d_array(char **args)
 
 static void	add_command(char *full, char **argv, int operator, int index)
 {
-	t_cmd *cmd;
+	t_cmd cmd;
 
-	cmd = ft_calloc(sizeof(t_cmd *), 1);
-	cmd->cmd_argv = argv;
-	cmd->cmd_name = argv[0];
-	cmd->cmd_params = full;
-	cmd->fwrd_op = operator;
+	cmd.cmd_name = ft_strdup(argv[0]);
+	cmd.cmd_params = ft_strdup(full);
+	cmd.fwrd_op = operator;
 	shell_mem->curr_cmd_list[index] = cmd;
 }
 
 shell_func	*get_exec_list(char **args)
 {
-	t_data			*hold;
+	t_data			hold;
 	shell_func*		commands;
 	int				i;
 	char			**tmp;
@@ -75,12 +73,13 @@ shell_func	*get_exec_list(char **args)
 	{
 		tmp = ft_split(args[i], ' ');
 		hold = find(tmp[0]);
-		if(!hold)
+		if(!hold.value)
 			commands[i] = try_run;
 		else
-			commands[i] = hold->value;
+			commands[i] = hold.value;
 		add_command(args[i], tmp, get_cmd_operators(args[i]), i);
 		i++;
+		free(args[i]);
 	}
 	commands[i] = NULL;
 	return commands;
